@@ -2,17 +2,16 @@ import React, { useEffect } from 'react';
 
 export function Modal({ largeImageURL, onModalClose }) {
   useEffect(() => {
+    const onKeyDown = evt => {
+      if (evt.code === 'Escape') {
+        onModalClose();
+      }
+    };
     window.addEventListener('keydown', onKeyDown);
     return () => {
       window.removeEventListener('keydown', onKeyDown);
     };
-  }, []);
-
-  const onKeyDown = evt => {
-    if (evt.code === 'Escape') {
-      onModalClose();
-    }
-  };
+  }, [onModalClose]);
 
   return (
     <div
